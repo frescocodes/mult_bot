@@ -24,11 +24,15 @@ client.once("ready", () => {
 
 // listen for messages
 client.on("message", (message) => {
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
+  if (
+    !message.content.startsWith(prefix) ||
+    message.author.bot ||
+    message.webhookID
+  )
+    return;
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const command = args.shift().toLowerCase();
-
   if (!client.commands.has(command)) {
     return;
   } else {
