@@ -1,4 +1,5 @@
 const request = require("request");
+const { hook } = require("../utils/webhook");
 
 module.exports = {
   name: "shopify",
@@ -19,13 +20,22 @@ module.exports = {
       let json = JSON.parse(body);
       const variants = {};
       const name = json.product.title;
-      // console.log(json.product.variants);
+      const thumbnail = json.product.image.src;
+      const desc = json.product.body_html;
+      const cat = json.product.product_type;
+      const price = json.product.variants[0].price;
 
       json.product.variants.forEach((variant) => {
-        variants[variant.title] = variant.id;
+        variants[variant.id] = variant.title;
       });
 
-      message.reply(`Variants for ${name} successfully retrieved.`);
+      const data = Object.keys(variants)
+        .map((x) => (variants[x] = x.toString() + "\t" + variants[x] + "\n"))
+        .reduce((a, b) => (a += b), "");
+
+      const final = `\`\`\`${data}\`\`\``;
+
+      hook(final, name, thumbnail, desc, cat, price);
     });
   },
 };
