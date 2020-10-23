@@ -18,12 +18,11 @@ module.exports = {
 
     request(options, (err, res, body) => {
       try {
-        let json = JSON.parse(body);
+        const json = JSON.parse(body);
         const variants = {};
-        const name = json.product.title;
-        const thumbnail = json.product.image.src;
-        const desc = json.product.body_html;
-        const cat = json.product.product_type;
+        const name = json.product.title; // product title
+        const thumbnail = json.product.image.src; // product image
+        const cat = json.product.product_type; // product category
         const price = json.product.variants[0].price;
 
         json.product.variants.forEach((variant) => {
@@ -38,7 +37,7 @@ module.exports = {
 
         const final = `\`\`\`\tCart ID\t\t\tSize\n${data}\`\`\``;
 
-        hook(final, name, thumbnail, desc, cat, price);
+        hook(final, name, thumbnail, cat, price);
       } catch {
         message.reply(
           "That link does not appear to contain a Shopify store. Please try again with a Shopify link."

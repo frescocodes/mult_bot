@@ -5,7 +5,7 @@ const WebhookClient = new Discord.WebhookClient(
   process.env.WEBHOOK_TOKEN
 );
 
-const hook = function (variants, title, thumb, desc, cat, price) {
+const hook = function (variants, title, thumb, cat, price) {
   const embed = new Discord.MessageEmbed().setTitle(title).setColor("#71EEB8");
 
   WebhookClient.send("", {
