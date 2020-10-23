@@ -2,8 +2,6 @@ const fs = require("fs");
 
 const commandFiles = fs.readdirSync("./src/commands").filter((file) => file);
 
-console.log("commandFiles", commandFiles);
-
 module.exports = {
   name: "help",
   description: "List of valid commands",

@@ -1,9 +1,11 @@
 const request = require("request");
+const { hook } = require("../utils/webhook");
 
 module.exports = {
   name: "shopify",
   description: "Shopify variant scraper",
   execute(message, args) {
+    // console.log("MESSAGE", message);
     const options = {
       url: args[0],
       method: "GET",
@@ -25,7 +27,7 @@ module.exports = {
         variants[variant.title] = variant.id;
       });
 
-      message.reply(`Variants for ${name} successfully retrieved.`);
+      hook(variants, name);
     });
   },
 };

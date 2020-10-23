@@ -6,6 +6,8 @@ const Discord = require("discord.js");
 // instantiate new instance of Discord.Client()
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+
+// get available commands
 const commandFiles = fs
   .readdirSync("./src/commands/")
   .filter((file) => file.endsWith(".js"));
