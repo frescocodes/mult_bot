@@ -5,7 +5,6 @@ module.exports = {
   name: "shopify",
   description: "Shopify variant scraper",
   execute(message, args) {
-    // console.log("MESSAGE", message);
     const options = {
       url: args[0],
       method: "GET",
@@ -21,13 +20,22 @@ module.exports = {
       let json = JSON.parse(body);
       const variants = {};
       const name = json.product.title;
-      // console.log(json.product.variants);
+      const thumbnail = json.product.image.src;
+      const desc = json.product.body_html;
+      const cat = json.product.product_type;
+      const price = json.product.variants[0].price;
 
       json.product.variants.forEach((variant) => {
-        variants[variant.title] = variant.id;
+        variants[variant.id] = variant.title;
       });
 
-      hook(variants, name);
+      const data = Object.keys(variants)
+        .map((x) => (variants[x] = x.toString() + "\t" + variants[x] + "\n"))
+        .reduce((a, b) => (a += b), "");
+
+      const final = `\`\`\`${data}\`\`\``;
+
+      hook(final, name, thumbnail, desc, cat, price);
     });
   },
 };
