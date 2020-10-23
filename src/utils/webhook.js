@@ -10,7 +10,7 @@ const hook = function (variants, title, thumb, cat, price) {
 
   WebhookClient.send("", {
     username: "Frescop Assistant",
-    avatarURL: "https://i.imgur.com/jdwIqvj.png",
+    avatar_url: "https://i.imgur.com/jdwIqvj.png",
     embeds: [
       {
         ...embed,
