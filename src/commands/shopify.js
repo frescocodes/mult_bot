@@ -17,25 +17,34 @@ module.exports = {
     };
 
     request(options, (err, res, body) => {
-      let json = JSON.parse(body);
-      const variants = {};
-      const name = json.product.title;
-      const thumbnail = json.product.image.src;
-      const desc = json.product.body_html;
-      const cat = json.product.product_type;
-      const price = json.product.variants[0].price;
+      try {
+        let json = JSON.parse(body);
+        const variants = {};
+        const name = json.product.title;
+        const thumbnail = json.product.image.src;
+        const desc = json.product.body_html;
+        const cat = json.product.product_type;
+        const price = json.product.variants[0].price;
 
-      json.product.variants.forEach((variant) => {
-        variants[variant.id] = variant.title;
-      });
+        json.product.variants.forEach((variant) => {
+          variants[variant.id] = variant.title;
+        });
 
-      const data = Object.keys(variants)
-        .map((x) => (variants[x] = x.toString() + "\t" + variants[x] + "\n"))
-        .reduce((a, b) => (a += b), "");
+        const data = Object.keys(variants)
+          .map(
+            (x) => (variants[x] = x.toString() + "\t\t" + variants[x] + "\n")
+          )
+          .reduce((a, b) => (a += b), "");
 
-      const final = `\`\`\`${data}\`\`\``;
+        const final = `\`\`\`\tCart ID\t\t\tSize\n${data}\`\`\``;
 
-      hook(final, name, thumbnail, desc, cat, price);
+        hook(final, name, thumbnail, desc, cat, price);
+      } catch {
+        message.reply(
+          "That link does not appear to contain a Shopify store. Please try again with a Shopify link."
+        );
+        return;
+      }
     });
   },
 };

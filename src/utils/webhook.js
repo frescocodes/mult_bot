@@ -24,7 +24,7 @@ const hook = function (variants, title, thumb, desc, cat, price) {
           },
           {
             name: "Price",
-            value: price,
+            value: `$` + price,
             inline: true,
           },
           {
