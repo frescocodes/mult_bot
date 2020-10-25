@@ -24,7 +24,6 @@ module.exports = {
       const desc = json.product.body_html;
       const cat = json.product.product_type;
       const price = json.product.variants[0].price;
-      console.log(json.product.variants[0].price);
 
       json.product.variants.forEach((variant) => {
         variants[variant.id] = variant.title;
@@ -36,9 +35,6 @@ module.exports = {
 
       const final = `\`\`\`${data}\`\`\``;
 
-      console.log(json.product.variants[0].price);
-      console.log(price);
-      console.log("CAT", cat);
       hook(final, name, thumbnail, cat, price);
     });
   },
