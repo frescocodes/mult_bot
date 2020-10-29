@@ -39,6 +39,7 @@ module.exports = {
 
         hook(final, name, thumbnail, cat, price);
       } catch {
+        console.log("ERROR: ", err);
         message.reply(
           "That link does not appear to contain a Shopify store. Please try again with a Shopify link."
         );

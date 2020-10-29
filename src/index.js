@@ -26,6 +26,27 @@ client.once("ready", () => {
 
 // listen for messages
 client.on("message", (message) => {
+  // destructure out of message
+  let username = message.author.username;
+  let discriminator = message.author.discriminator;
+  let fullName = `${username}` + "#" + `${discriminator}`;
+
+  try {
+    const points = fs.readFileSync("points.json", "utf-8");
+    let parsed = JSON.parse(points);
+
+    if (fullName in parsed === true) {
+      parsed[fullName].points += 1;
+      let data = JSON.stringify(parsed);
+      fs.writeFileSync("points.json", data);
+      console.log("AFTER", parsed);
+    } else {
+      console.log("no");
+    }
+  } catch {
+    console.log("ERROR", error);
+  }
+
   if (
     !message.content.startsWith(prefix) ||
     message.author.bot ||
