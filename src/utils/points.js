@@ -1,30 +1,27 @@
 const fs = require("fs");
 
-// base data
+// base user
 const base = { level: 1, needed: 10, points: 1 };
 
 function points(message) {
-  let username = message.author.username;
-  let discriminator = message.author.discriminator;
-  let fullName = `${username}` + "#" + `${discriminator}`;
-
   try {
     const points = fs.readFileSync("points.json", "utf-8");
     let parsed = JSON.parse(points);
+    let user = message.author.id;
 
     // if user exists already in points.json
-    if (fullName in parsed === true) {
-      parsed[fullName].points += 1;
+    if (user in parsed === true) {
+      parsed[user].points += 1;
 
-      if (parsed[fullName].points >= parsed[fullName].needed) {
+      if (parsed[user].points >= parsed[user].needed) {
         // increase level
-        parsed[fullName].level += 1;
+        parsed[user].level += 1;
         // multiply points necessary for level up
-        parsed[fullName].needed = Math.floor((parsed[fullName].needed *= 1.75));
+        parsed[user].needed = Math.floor((parsed[user].needed *= 1.75));
       }
     } else {
       // add the user into the points log
-      parsed[fullName] = base;
+      parsed[user] = base;
     }
     let data = JSON.stringify(parsed);
     fs.writeFileSync("points.json", data);
