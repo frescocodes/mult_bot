@@ -26,6 +26,33 @@ client.once("ready", () => {
 
 // listen for messages
 client.on("message", (message) => {
+  // fs.readFile("points.json", "utf8", (err, data) => {
+  //   if (err) throw err;
+  //   return;
+  // });
+
+  try {
+    const points = fs.readFileSync("points.json", "utf-8");
+    let parsed = JSON.parse(points);
+
+    if (
+      `${message.author.username}` + "#" + `${message.author.discriminator}` in
+        parsed ===
+      true
+    ) {
+      parsed[
+        `${message.author.username}` + "#" + `${message.author.discriminator}`
+      ].points += 1;
+      let data = JSON.stringify(parsed);
+      fs.writeFileSync("points.json", data);
+      console.log("AFTER", parsed);
+    } else {
+      console.log("no");
+    }
+  } catch {
+    console.log("ERROR", error);
+  }
+
   if (
     !message.content.startsWith(prefix) ||
     message.author.bot ||

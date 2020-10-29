@@ -1,4 +1,6 @@
-const pointsFile = require("../../points.json");
+const fs = require("fs");
+
+// import points
 
 module.exports = {
   name: "points",
