@@ -22,20 +22,14 @@ function points(message) {
         // multiply points necessary for level up
         parsed[fullName].needed = Math.floor((parsed[fullName].needed *= 1.75));
       }
-
-      // write to file
-      let data = JSON.stringify(parsed);
-      console.log("DATA: ", data);
-      fs.writeFileSync("points.json", data);
-      console.log("Points saved.");
     } else {
       // add the user into the points log
       parsed[fullName] = base;
-      let data = JSON.stringify(parsed);
-      fs.writeFileSync("points.json", data);
     }
+    let data = JSON.stringify(parsed);
+    fs.writeFileSync("points.json", data);
   } catch {
-    console.log("ERROR", error);
+    console.error("ERROR", error);
   }
 }
 
