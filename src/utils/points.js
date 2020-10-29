@@ -1,5 +1,4 @@
 const fs = require("fs");
-const { fileURLToPath } = require("url");
 
 // base data
 const base = { level: 1, needed: 10, points: 1 };
