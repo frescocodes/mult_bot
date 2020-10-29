@@ -1,6 +1,7 @@
 require("dotenv").config();
 const fs = require("fs");
 const { prefix } = require("../config.json");
+const { points } = require("./utils/points");
 // import Discord
 const Discord = require("discord.js");
 // instantiate new instance of Discord.Client()
@@ -26,26 +27,8 @@ client.once("ready", () => {
 
 // listen for messages
 client.on("message", (message) => {
-  // destructure out of message
-  let username = message.author.username;
-  let discriminator = message.author.discriminator;
-  let fullName = `${username}` + "#" + `${discriminator}`;
-
-  try {
-    const points = fs.readFileSync("points.json", "utf-8");
-    let parsed = JSON.parse(points);
-
-    if (fullName in parsed === true) {
-      parsed[fullName].points += 1;
-      let data = JSON.stringify(parsed);
-      fs.writeFileSync("points.json", data);
-      console.log("AFTER", parsed);
-    } else {
-      console.log("no");
-    }
-  } catch {
-    console.log("ERROR", error);
-  }
+  // points tracker
+  points(message);
 
   if (
     !message.content.startsWith(prefix) ||
