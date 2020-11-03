@@ -3,7 +3,7 @@ const fs = require("fs");
 // base user
 const base = { level: 1, needed: 10, points: 1 };
 
-function points(message) {
+function updatePoints(message) {
   try {
     const points = fs.readFileSync("points.json", "utf-8");
     let parsed = JSON.parse(points);
@@ -31,5 +31,5 @@ function points(message) {
 }
 
 module.exports = {
-  points,
+  updatePoints,
 };
