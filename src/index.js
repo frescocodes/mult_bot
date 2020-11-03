@@ -1,7 +1,7 @@
 require("dotenv").config();
 const fs = require("fs");
 const { prefix } = require("../config.json");
-const { updatePoints } = require("./utils/points");
+const { updatePoints } = require("./utils/updatePoints");
 // import Discord
 const Discord = require("discord.js");
 // instantiate new instance of Discord.Client()
