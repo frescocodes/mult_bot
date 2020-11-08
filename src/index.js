@@ -1,7 +1,7 @@
 require("dotenv").config();
 const fs = require("fs");
 const { prefix } = require("../config.json");
-const { points } = require("./utils/points");
+const { updatePoints } = require("./utils/updatePoints");
 // import Discord
 const Discord = require("discord.js");
 // instantiate new instance of Discord.Client()
@@ -28,7 +28,7 @@ client.once("ready", () => {
 // listen for messages
 client.on("message", (message) => {
   // points tracker
-  points(message);
+  updatePoints(message);
 
   if (
     !message.content.startsWith(prefix) ||
