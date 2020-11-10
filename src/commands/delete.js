@@ -9,7 +9,13 @@ module.exports = {
       message.delete();
       // get n messages
       const fetched = await message.channel.messages.fetch({ limit: args[0] });
-      message.channel.bulkDelete(fetched);
+      try {
+        message.channel.bulkDelete(fetched);
+      } catch {
+        message.reply(
+          "Sorry, I cannot bulk delete messages over 15 days old. Please try again."
+        );
+      }
     }
   },
 };
