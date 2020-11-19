@@ -40,12 +40,6 @@ module.exports = {
   async execute(message, args) {
     message.channel.send("Fetching latest Coronavirus statistics...");
     const result = await scrape(siteURL);
-    // console.log(initial);
-    // console.log('id', initial.channel.id);
-    // const result = await scrape(siteURL);
-    // initial.edit(
-    //   `Here are the latest Coronavirus statistics:\n**Infected:** ${result.infectedRaw}\n**Deaths:** ${result.deathsRaw}`
-    // );
     message.channel.send(
       `Here are the latest Coronavirus statistics:\n**Infected:** ${result.infectedRaw}\n**Deaths:** ${result.deathsRaw}\n**Recovered:** ${result.recoveredRaw}`
     );
