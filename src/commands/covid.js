@@ -35,7 +35,7 @@ const scrape = async (url) => {
 };
 
 module.exports = {
-  name: "corona",
+  name: "covid",
   description: "Get latest stats on the Corona Virus",
   async execute(message, args) {
     message.channel.send("Fetching latest Coronavirus statistics...");
