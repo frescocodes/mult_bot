@@ -47,9 +47,9 @@ module.exports = {
   name: "corona",
   description: "COVID-19 statistics scraper",
   execute(message, args) {
-    console.log("ARGS LENGTH", args.length);
     if (args.length >= 1) {
       const upper = args[0].toUpperCase();
+      8;
       if (upper in parsed) {
         message.reply(
           `${parsed[upper].name} currently has ${parsed[upper].tot_cases} total cases.`

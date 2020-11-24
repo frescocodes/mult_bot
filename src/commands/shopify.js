@@ -37,11 +37,11 @@ module.exports = {
 
         const final = `\`\`\`\tCart ID\t\t\tSize\n${data}\`\`\``;
 
-        hook(final, name, thumbnail, cat, price);
+        hook(final, name, thumbnail, cat, price, "shopify");
       } catch {
         console.log("ERROR: ", err);
         message.reply(
-          "That link does not appear to contain a Shopify store. Please try again with a Shopify link."
+          "That link does not appear to be a Shopify store. Please try again with a Shopify link."
         );
         return;
       }
