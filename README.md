@@ -14,7 +14,7 @@ All commands must be prefixed with the `$` symbol for the bot to interpret it.
 - Fetches latest COVID-19 statistics from the CDC. The bot automatically fetches once every 30 minutes and caches the data to a JSON file to prevent pinging the CDC site too often. This command also allows for arguments, such as state or country, if you only want statistics for specific areas. By default this command returns statistics for the entire USA if no arguement is provided. ex: `$covid tx`
 
 #### Delete
-- Bulk deletes up to 100 messages. Per Discord limitation, messages older than 14 days old may not be deleted using this function. ex: `$delete 69`
+- Bulk deletes up to 100 of the latest messages in the current channel. Per Discord limitation, messages older than 14 days old may not be deleted using this function. ex: `$delete 69`
 
 #### Points
 - Returns the user's current accumulated points in the server. ex: `$points`
